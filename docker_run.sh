@@ -1,5 +1,8 @@
 #/bin/bash
 
+REGION="us-east-1"
+TO_BUCKET="my-to-bucket"
+
 docker build --tag copy-bucket:latest  .
 
 # If the container is still running, will stop it

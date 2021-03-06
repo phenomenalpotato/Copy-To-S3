@@ -6,6 +6,7 @@
 #include <awsdoc/s3/s3_examples.h>
 #include <aws/s3/model/CopyObjectRequest.h>
 #include <aws/s3/model/ListObjectsRequest.h>
+#include <aws/s3/model/Bucket.h>
 
 
 bool AwsDoc::S3::CopyObject(const Aws::String& objectKey, const Aws::String& fromBucket, const Aws::String& toBucket, const Aws::String& region)  {
@@ -107,22 +108,59 @@ bool AwsDoc::S3::ListObjects(const Aws::String& bucketName, const Aws::String& r
 
 }
 
+bool AwsDoc::S3::ListBuckets() {
 
-int main(void) {
+    Aws::S3::S3Client s3_client3;
+    Aws::S3::Model::ListBucketsOutcome outcome3 = s3_client3.ListBuckets();
+
+    if(outcome3.IsSuccess()) {
+
+        std::cout << "Copying objects from: Bucket:" << std::endl << std::endl;
+    
+        Aws::Vector<Aws::S3::Model::Bucket> buckets = outcome3.GetResult().GetBuckets();
+
+        for(Aws::S3::Model::Bucket& bucket : buckets) {
+
+            std::cout << bucket.GetName() << std::endl;
+
+            Aws::String bucket_name = bucket.GetName(); // "my-from-bucket";
+            Aws::String region = "us-region";
+
+            if(!AwsDoc::S3::ListObjects(bucket_name, region)) {
+
+                return 1;
+
+            }
+
+        }
+
+        return true;
+    }
+
+    else {
+
+        std::cout << "Error: ListBuckets: " << outcome3.GetError().GetMessage() << std::endl;
+
+        return false;
+    }
+
+}
+
+
+int main(int argc, char *argv[]) {
 
     Aws::SDKOptions options;
     Aws::InitAPI(options); 
     {
 
-        Aws::String bucket_name = "my-from-bucket";
-        Aws::String region = "us-region";
-
-        if(!AwsDoc::S3::ListObjects(bucket_name, region)) {
+        if(!AwsDoc::S3::ListBuckets()) {
 
             return 1;
+        }
 
-        } 
+
     }
+
 
     Aws::ShutdownAPI(options);
 
