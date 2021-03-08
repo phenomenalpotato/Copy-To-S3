@@ -1,6 +1,6 @@
 # Copy-To-S3
 
-## This program will copy all the objects listed in a bucket and copy to another bucket!
+## This program will copy all the objects listed in all bucket in your account and copy to another bucket!
 
 <hr />
 <br />
@@ -38,6 +38,9 @@
 <hr />
 <br />
 
+### Tests:
+
+<b> The tool copying 3.011 objects in 10 buckets in one account took 3 hours and 24 minutes hours. </b>
 
 ### WARNING:
 

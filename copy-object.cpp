@@ -9,6 +9,18 @@
 #include <aws/s3/model/Bucket.h>
 
 
+/*
+
+Todo:
+
+	- Pegar os argumentos via var de ambiente;
+	- Fazer com que escanei todos os buckets;
+	- Fazer pegar as Tags do buckets;
+	- O cara poder escolher qual arquivo(?)
+	- Ver quanto tempo demora para executar ao fazer a ação com X objetos e X buckets;
+
+*/
+
 bool AwsDoc::S3::CopyObject(const Aws::String& objectKey, const Aws::String& fromBucket, const Aws::String& toBucket, const Aws::String& region)  {
 
     Aws::Client::ClientConfiguration config;
@@ -157,8 +169,7 @@ int main(int argc, char *argv[]) {
 
             return 1;
         }
-
-
+        
     }
 
 
