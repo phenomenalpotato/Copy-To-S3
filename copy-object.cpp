@@ -7,6 +7,7 @@
 #include <aws/s3/model/CopyObjectRequest.h>
 #include <aws/s3/model/ListObjectsRequest.h>
 #include <aws/s3/model/Bucket.h>
+#include <aws/s3/model/GetObjectTaggingResult.h>
 
 
 /*
